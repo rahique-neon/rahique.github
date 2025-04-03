@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxLease | Luxury Attire for Special Occasions</title>
+    <style>
+        :root {
+            --primary: #26231C;
+            --accent: #A67C52;
+            --light: #F4F1EA;
+            --gray: #DADADA;
+            --dark: #141414;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+        
+        header {
+            background-color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/api/placeholder/1200/600') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .search-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: -3rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .search-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        input, select {
+            padding: 0.8rem;
+            border: 1px solid var(--gray);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        button {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #8a6644;
+        }
+        
+        .main-content {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-title p {
+            color: #666;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .product-image {
+            height: 300px;
+            background: var(--gray);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-name {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-designer {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .product-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .price {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .price span {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: #666;
+        }
+        
+        .features {
+            padding: 4rem 0;
+            background-color: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .feature-icon {
+            background-color: var(--light);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+        
+        .feature h3 {
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .search-container {
+                margin-top: -2rem;
+                padding: 1.5rem;
+            }
+            
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+        
+        #results-container {
+            display: none;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">Lux<span>Lease</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#">Women</a></li>
+                    <li><a href="#">Men</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">How It Works</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Luxury Attire for Your Special Occasions</h1>
+            <p>Rent designer dresses, suits, and accessories for a fraction of the retail price.</p>
+        </div>
+    </section>
+    
+    <div class="search-container">
+        <form class="search-form" id="rental-form">
+            <div class="form-group">
+                <label for="event-type">Event Type</label>
+                <select id="event-type" required>
+                    <option value="">Select event</option>
+                    <option value="wedding">Wedding</option>
+                    <option value="gala">Gala</option>
+                    <option value="business">Business</option>
+                    <option value="cocktail">Cocktail Party</option>
+                    <option value="formal">Formal Dinner</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category" required>
+                    <option value="">Select category</option>
+                    <option value="dresses">Dresses</option>
+                    <option value="suits">Suits</option>
+                    <option value="jewelry">Jewelry</option>
+                    <option value="bags">Bags</option>
+                    <option value="shoes">Shoes</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="size">Size</label>
+                <select id="size">
+                    <option value="">Select size</option>
+                    <option value="XS">XS</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date">Event Date</label>
+                <input type="date" id="date">
+            </div>
+            <div class="form-group">
+                <label>&nbsp;</label>
+                <button type="submit">Find Items</button>
+            </div>
+        </form>
+    </div>
+    
+    <main class="main-content">
+        <div id="featured-section">
+            <div class="section-title">
+                <h2>Featured Collections</h2>
+                <p>Our most popular designer pieces for this season</p>
+            </div>
+            
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image" style="background: url('/api/placeholder/400/500') center/cover">
+                        <div class="product-badge">Trending</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Sequin Evening Gown</h3>
+                        <p class="product-designer">Vera Wang</p>
+                        <div class="product-price">
+                            <div class="price">$89 <span>/ 4 days</span></div>
+                            <button>Reserve</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image" style="background: url('/api/placeholder/400/501') center/cover">
+                        <div class="product-badge">New</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Tuxedo Set</h3>
+                        <p class="product-designer">Tom Ford</p>
+                        <div class="product-price">
+                            <div class="price">$120 <span>/ 4 days</span></div>
+                            <button>Reserve</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image" style="background: url('/api/placeholder/401/500') center/cover">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Diamond Necklace</h3>
+                        <p class="product-designer">Tiffany & Co.</p>
+                        <div class="product-price">
+                            <div class="price">$75 <span>/ 4 days</span></div>
+                            <button>Reserve</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image" style="background: url('/api/placeholder/401/501') center/cover">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Designer Clutch</h3>
+                        <p class="product-designer">Chanel</p>
+                        <div class="product-price">
+                            <div class="price">$65 <span>/ 4 days</span></div>
+                            <button>Reserve</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="results-container">
+            <div class="section-title">
+                <h2>Search Results</h2>
+                <p id="results-summary">We found <span id="results-count">0</span> items matching your criteria</p>
+            </div>
+            
+            <div class="product-grid" id="results-grid">
+                <!-- Results will be dynamically populated here -->
+            </div>
+        </div>
+    </main>
+    
+    <section class="features">
+        <div class="main-content">
+            <div class="section-title">
+                <h2>How LuxLease Works</h2>
+                <p>Rent luxury items in three simple steps</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">1</div>
+                    <h3>Browse & Reserve</h3>
+                    <p>Find the perfect outfit for your event. Filter by size, event type, and date.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">2</div>
+                    <h3>Receive & Enjoy</h3>
+                    <p>We'll deliver your items 2 days before your event, professionally cleaned and ready to wear.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">3</div>
+                    <h3>Return</h3>
+                    <p>Simply use our prepaid return packaging. No cleaning necessary!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>LuxLease</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="#">Dresses</a></li>
+                    <li><a href="#">Suits & Tuxedos</a></li>
+                    <li><a href="#">Jewelry</a></li>
+                    <li><a href="#">Bags & Accessories</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Help</h3>
+                <ul>
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#">Delivery & Returns</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Stay Connected</h3>
+                <ul>
+                    <li><a href="#">Newsletter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                    <li><a href="#">Facebook</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 LuxLease. All rights reserved.
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const rentalForm = document.getElementById('rental-form');
+            const featuredSection = document.getElementById('featured-section');
+            const resultsContainer = document.getElementById('results-container');
+            const resultsGrid = document.getElementById('results-grid');
+            const resultsCount = document.getElementById('results-count');
+            
+            // Sample product data (in a real app, this would come from a database)
+            const products = [
+                {
+                    id: 1,
+                    name: "Black Tie Gown",
+                    designer: "Oscar de la Renta",
+                    price: 95,
+                    category: "dresses",
+                    eventTypes: ["gala", "formal", "wedding"],
+                    sizes: ["XS", "S", "M", "L"],
+                    image:"black tie gown.jpg"
+                    
+                    
+                },
+                {
+                    id: 2,
+                    name: "Navy Tuxedo",
+                    designer: "Hugo Boss",
+                    price: 110,
+                    category: "suits",
+                    eventTypes: ["gala", "formal", "wedding", "business"],
+                    sizes: ["S", "M", "L", "XL"],
+                    image: "/api/placeholder/402/500"
+                },
+                {
+                    id: 3,
+                    name: "Cocktail Dress",
+                    designer: "Diane von Furstenberg",
+                    price: 75,
+                    category: "dresses",
+                    eventTypes: ["cocktail", "business"],
+                    sizes: ["XS", "S", "M"],
+                    image: "/api/placeholder/402/501"
+                },
+                {
+                    id: 4,
+                    name: "Designer Handbag",
+                    designer: "Louis Vuitton",
+                    price: 60,
+                    category: "bags",
+                    eventTypes: ["gala", "formal", "wedding", "cocktail", "business"],
+                    sizes: [],
+                    image: "/api/placeholder/402/502"
+                },
+                {
+                    id: 5,
+                    name: "Statement Earrings",
+                    designer: "Bulgari",
+                    price: 45,
+                    category: "jewelry",
+                    eventTypes: ["gala", "formal", "wedding", "cocktail"],
+                    sizes: [],
+                    image: "/api/placeholder/403/500"
+                },
+                {
+                    id: 6,
+                    name: "Designer Heels",
+                    designer: "Jimmy Choo",
+                    price: 55,
+                    category: "shoes",
+                    eventTypes: ["gala", "formal", "wedding", "cocktail"],
+                    sizes: ["S", "M", "L"],
+                    image: "/api/placeholder/403/501"
+                },
+                {
+                    id: 7,
+                    name: "Business Suit",
+                    designer: "Armani",
+                    price: 105,
+                    category: "suits",
+                    eventTypes: ["business"],
+                    sizes: ["M", "L", "XL", "XXL"],
+                    image: "/api/placeholder/403/502"
+                },
+                {
+                    id: 8,
+                    name: "Casual Blazer",
+                    designer: "Ralph Lauren",
+                    price: 70,
+                    category: "suits",
+                    eventTypes: ["business", "cocktail"],
+                    sizes: ["S", "M", "L", "XL"],
+                    image: "/api/placeholder/404/500"
+                }
+            ];
+            
+            rentalForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Get form values
+                const eventType = document.getElementById('event-type').value;
+                const category = document.getElementById('category').value;
+                const size = document.getElementById('size').value;
+                
+                // Filter products based on form input
+                let filteredProducts = products;
+                
+                if (eventType) {
+                    filteredProducts = filteredProducts.filter(product => 
+                        product.eventTypes.includes(eventType)
+                    );
+                }
+                
+                if (category) {
+                    filteredProducts = filteredProducts.filter(product => 
+                        product.category === category
+                    );
+                }
+                
+                if (size && size !== "") {
+                    filteredProducts = filteredProducts.filter(product => 
+                        product.sizes.length === 0 || product.sizes.includes(size)
+                    );
+                }
+                
+                // Display results
+                displayResults(filteredProducts);
+            });
+            
+            function displayResults(products) {
+                // Clear previous results
+                resultsGrid.innerHTML = '';
+                
+                // Update results count
+                resultsCount.textContent = products.length;
+                
+                // Hide featured section, show results
+                featuredSection.style.display = 'none';
+                resultsContainer.style.display = 'block';
+                
+                // Generate product cards
+                products.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card';
+                    
+                    productCard.innerHTML = `
+                        <div class="product-image" style="background: url('${product.image}') center/cover">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">${product.name}</h3>
+                            <p class="product-designer">${product.designer}</p>
+                            <div class="product-price">
+                                <div class="price">$${product.price} <span>/ 4 days</span></div>
+                                <button>Reserve</button>
+                            </div>
+                        </div>
+                    `;
+                    
+                    resultsGrid.appendChild(productCard);
+                });
+                
+                // If no results
+                if (products.length === 0) {
+                    resultsGrid.innerHTML = `
+                        <div style="grid-column: 1/-1; text-align: center; padding: 2rem;">
+                            <p>No items match your criteria. Please try different search parameters.</p>
+                        </div>
+                    `;
+                }
+                
+                // Scroll to results
+                resultsContainer.scrollIntoView({behavior: 'smooth'});
+            }
+        });
+        // Add this script at the end of the existing script section in your HTML file
+
+// Function to handle reservation button clicks throughout the site
+function initializeReservationButtons() {
+  // Get all reservation buttons on the page
+  const reserveButtons = document.querySelectorAll('button');
+  
+  reserveButtons.forEach(button => {
+    if (button.textContent === 'Reserve') {
+      button.addEventListener('click', function(e) {
+        // Get product information from the parent elements
+        const productCard = this.closest('.product-card');
+        const productName = productCard.querySelector('.product-name').textContent;
+        const productDesigner = productCard.querySelector('.product-designer').textContent;
+        
+        // Show reservation modal
+        showReservationModal(productName, productDesigner);
+        
+        // Prevent form submission if button is within a form
+        e.preventDefault();
+      });
+    }
+  });
+}
+
+// Function to create and show reservation modal
+function showReservationModal(productName, productDesigner) {
+  // Create modal container
+  const modalContainer = document.createElement('div');
+  modalContainer.style.position = 'fixed';
+  modalContainer.style.top = '0';
+  modalContainer.style.left = '0';
+  modalContainer.style.width = '100%';
+  modalContainer.style.height = '100%';
+  modalContainer.style.backgroundColor = 'rgba(0,0,0,0.7)';
+  modalContainer.style.display = 'flex';
+  modalContainer.style.justifyContent = 'center';
+  modalContainer.style.alignItems = 'center';
+  modalContainer.style.zIndex = '1000';
+  
+  // Create modal content
+  const modalContent = document.createElement('div');
+  modalContent.style.backgroundColor = 'white';
+  modalContent.style.padding = '2rem';
+  modalContent.style.borderRadius = '8px';
+  modalContent.style.maxWidth = '500px';
+  modalContent.style.width = '90%';
+  
+  // Modal header
+  const modalHeader = document.createElement('h2');
+  modalHeader.textContent = 'Reserve Item';
+  modalHeader.style.marginBottom = '1rem';
+  
+  // Item details
+  const itemDetails = document.createElement('p');
+  itemDetails.innerHTML = `<strong>${productName}</strong> by ${productDesigner}`;
+  itemDetails.style.marginBottom = '1.5rem';
+  
+  // Create reservation form
+  const reservationForm = document.createElement('form');
+  reservationForm.innerHTML = `
+    <div style="margin-bottom: 1rem;">
+      <label for="rental-start" style="display: block; margin-bottom: 0.5rem;">Rental Start Date:</label>
+      <input type="date" id="rental-start" required style="width: 100%; padding: 0.8rem; border: 1px solid #DADADA; border-radius: 4px;">
+    </div>
+    
+    <div style="margin-bottom: 1rem;">
+      <label for="rental-end" style="display: block; margin-bottom: 0.5rem;">Rental End Date:</label>
+      <input type="date" id="rental-end" required style="width: 100%; padding: 0.8rem; border: 1px solid #DADADA; border-radius: 4px;">
+    </div>
+    
+    <div style="margin-bottom: 1.5rem;">
+      <label for="delivery-address" style="display: block; margin-bottom: 0.5rem;">Delivery Address:</label>
+      <textarea id="delivery-address" required style="width: 100%; padding: 0.8rem; border: 1px solid #DADADA; border-radius: 4px; min-height: 80px;"></textarea>
+    </div>
+    
+    <div style="display: flex; justify-content: space-between;">
+      <button type="button" id="cancel-reservation" style="background-color: #e0e0e0; color: #333; border: none; padding: 0.8rem 1.5rem; border-radius: 4px; cursor: pointer;">Cancel</button>
+      <button type="submit" id="confirm-reservation" style="background-color: #A67C52; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 4px; cursor: pointer;">Confirm Reservation</button>
+    </div>
+  `;
+  
+  // Add form submission handler
+  reservationForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form values
+    const startDate = document.getElementById('rental-start').value;
+    const endDate = document.getElementById('rental-end').value;
+    const address = document.getElementById('delivery-address').value;
+    
+    // Close the modal
+    document.body.removeChild(modalContainer);
+    
+    // Show success message
+    showSuccessMessage(productName, startDate, endDate);
+  });
+  
+  // Append elements to modal
+  modalContent.appendChild(modalHeader);
+  modalContent.appendChild(itemDetails);
+  modalContent.appendChild(reservationForm);
+  modalContainer.appendChild(modalContent);
+  
+  // Add modal to body
+  document.body.appendChild(modalContainer);
+  
+  // Handle cancel button
+  document.getElementById('cancel-reservation').addEventListener('click', function() {
+    document.body.removeChild(modalContainer);
+  });
+  
+  // Close modal when clicking outside
+  modalContainer.addEventListener('click', function(e) {
+    if (e.target === modalContainer) {
+      document.body.removeChild(modalContainer);
+    }
+  });
+  
+  // Set minimum dates for rental period
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  
+  const startInput = document.getElementById('rental-start');
+  const endInput = document.getElementById('rental-end');
+  
+  // Format dates as YYYY-MM-DD for input min attribute
+  startInput.min = formatDate(today);
+  endInput.min = formatDate(tomorrow);
+  
+  // Add listener to update end date min value when start date changes
+  startInput.addEventListener('change', function() {
+    const selectedStart = new Date(this.value);
+    const dayAfterStart = new Date(selectedStart);
+    dayAfterStart.setDate(dayAfterStart.getDate() + 1);
+    endInput.min = formatDate(dayAfterStart);
+    
+    // If current end date is before new minimum, update it
+    if (new Date(endInput.value) <= selectedStart) {
+      endInput.value = formatDate(dayAfterStart);
+    }
+  });
+}
+
+// Function to display success message
+function showSuccessMessage(productName, startDate, endDate) {
+  // Create success message container
+  const successContainer = document.createElement('div');
+  successContainer.style.position = 'fixed';
+  successContainer.style.top = '20px';
+  successContainer.style.left = '50%';
+  successContainer.style.transform = 'translateX(-50%)';
+  successContainer.style.backgroundColor = '#4CAF50';
+  successContainer.style.color = 'white';
+  successContainer.style.padding = '1rem 2rem';
+  successContainer.style.borderRadius = '4px';
+  successContainer.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+  successContainer.style.zIndex = '1000';
+  successContainer.style.textAlign = 'center';
+  
+  // Format dates for display
+  const formattedStartDate = new Date(startDate).toLocaleDateString();
+  const formattedEndDate = new Date(endDate).toLocaleDateString();
+  
+  // Add success message
+  successContainer.innerHTML = `
+    <h3 style="margin-top: 0.5rem;">Reservation Confirmed!</h3>
+    <p>${productName} has been reserved for you from ${formattedStartDate} to ${formattedEndDate}.</p>
+    <p style="margin-bottom: 0.5rem;">Thank you for choosing LuxLease!</p>
+  `;
+  
+  // Add to body
+  document.body.appendChild(successContainer);
+  
+  // Remove after 6 seconds
+  setTimeout(function() {
+    if (document.body.contains(successContainer)) {
+      document.body.removeChild(successContainer);
+    }
+  }, 6000);
+}
+
+// Helper function to format date as YYYY-MM-DD
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+// Initialize reservation buttons when the DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize reservation buttons on page load
+  initializeReservationButtons();
+  
+  // Also initialize reservation buttons after search results are displayed
+  const rentalForm = document.getElementById('rental-form');
+  if (rentalForm) {
+    rentalForm.addEventListener('submit', function() {
+      // Wait for results to be rendered
+      setTimeout(initializeReservationButtons, 100);
+    });
+  }
+});
+    </script>
+</body>
+</html>
